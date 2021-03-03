@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState} from 'react';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import Switcher from './components/Switcher'
+import ScenicSpot from './pages/ScenicSpot'
+import { defaultMode } from './constant'
+import { TypeContext, CurCityContext } from './contexts/Contexts'
 
 function App() {
+
+  const [type, setType] = useState(defaultMode);
+  const [curCity, setCurCity] = useState(null);
+
+  console.log("APP Render")
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <TypeContext.Provider value={[type, setType]}>
+      <CurCityContext.Provider value={[curCity, setCurCity]}>
+        <Router>
+          <Switcher/>
+          <Switch>
+            <Route path="/scenicSpot/:city" render={() => <ScenicSpot/>} />
+            <Route exact path="/scenicSpot" render={() => <ScenicSpot/>} />
+          </Switch>
+        </Router>
+      </CurCityContext.Provider>
+    </TypeContext.Provider>
+  )
 }
 
-export default App;
+export default App
+
