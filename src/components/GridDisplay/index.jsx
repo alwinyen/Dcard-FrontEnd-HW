@@ -2,10 +2,11 @@ import React, { useState, useContext, useEffect } from 'react';
 import Container from 'react-bootstrap/Container'
 import CardColumns from 'react-bootstrap/CardColumns'
 import Card from 'react-bootstrap/Card'
+import ErrorBox from './ErrorBox'
+import HasMoreBox from './HasMoreBox'
 import { CurCityContext } from '../../contexts/Contexts'
 import InfiniteScroll from 'react-infinite-scroller';
 import Spinner from 'react-bootstrap/Spinner'
-import Alert from 'react-bootstrap/Alert'
 import axios from 'axios';
 
 function GridDisplay() {
@@ -18,7 +19,7 @@ function GridDisplay() {
   const [curCity] = useContext(CurCityContext)
 
   const fetchMoreData = () => {
-    
+    console.log("FETCH", curCity, page)
     const skip = page <= 0 ? 0 : (page - 1) * 30
     const url = curCity !== "ALL" ? `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${curCity}` : `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot`
 
@@ -92,29 +93,11 @@ function GridDisplay() {
           }
           </CardColumns>
         </InfiniteScroll>
-        {
-          !error ? <></> : 
-          <Alert variant="danger">
-            <Alert.Heading>出現錯誤</Alert.Heading>
-            <p>
-              錯誤訊息: 
-              {error.response.data.message}
-            </p>
-          </Alert>
-        }
-        {
-          hasMore ? <></> : 
-          !error ?
-          <Alert variant="success">
-            <Alert.Heading>已經沒有了喔!</Alert.Heading>
-            <p>
-              可以選擇其他縣市繼續查看喔!
-            </p>
-          </Alert> : <></>
-        }
+        <ErrorBox error={error}/>
+        <HasMoreBox error={error} hasMore={hasMore}/>
       </Container>
     </React.Fragment>
   )
 }
 
-export default GridDisplay
+export default React.memo(GridDisplay)

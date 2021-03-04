@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import GridDisplay from '../components/GridDisplay'
 
 import { useParams } from "react-router-dom";
@@ -21,7 +21,7 @@ function ScenicSpotCity() {
     }
   }, [params, setType, setcurCity])
 
-  return (
+  return(
     <GridDisplay/>
   )
 }

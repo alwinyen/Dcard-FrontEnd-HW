@@ -14,7 +14,7 @@ function Switcher() {
   const [curCity, setcurCity] = useContext(CurCityContext)
   const history = useHistory();
 
-  const handleButtonClick = () => {
+  function handleButtonClick() {
     setType(!type)
     if (type) {
       setType(cityMode);
@@ -27,7 +27,7 @@ function Switcher() {
     }
   }
 
-  const handleCityChange = (e) => {
+  function handleCityChange(e) {
     setcurCity(e.target.value)
     history.push(`/scenicSpot/${e.target.value}`);
   }
@@ -64,4 +64,4 @@ function Switcher() {
   )
 }
 
-export default Switcher
+export default React.memo(Switcher)
