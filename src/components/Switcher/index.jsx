@@ -8,14 +8,13 @@ import { defaultMode, cityMode, defaultCity } from '../../constant'
 
 function Switcher() {
 
-  console.log("Switcher Render")
-
   const [type, setType] = useContext(TypeContext);
   const [curCity, setcurCity] = useContext(CurCityContext)
   const history = useHistory();
 
   function handleButtonClick() {
     setType(!type)
+
     if (type) {
       setType(cityMode);
       setcurCity(defaultCity)
@@ -25,6 +24,7 @@ function Switcher() {
       setcurCity("ALL")
       history.push("/scenicSpot");
     }
+    
   }
 
   function handleCityChange(e) {
@@ -33,7 +33,7 @@ function Switcher() {
   }
 
   return (
-    <React.Fragment>
+    <>
       {
         type ?
           <Button className="mt-5 mx-5" variant="primary" size="lg" onClick={handleButtonClick}>
@@ -41,26 +41,25 @@ function Switcher() {
           </Button>
           :
           <>
-          <Button className="mt-5 mx-5" variant="primary" size="lg" onClick={handleButtonClick}>
-            切換至全部景點
-          </Button>
-          
-          <Form.Group>
-            <Form.Control className="mt-5" as="select" value={curCity} onChange={handleCityChange}>
-              {
-                cities.map(city => {
-                  return(
-                    <option key={city.value} value={city.value}>{city.name}</option>
-                  )
-                })
-              }
-              
-            </Form.Control>
-          </Form.Group>
-          
+            <Button className="mt-5 mx-5" variant="primary" size="lg" onClick={handleButtonClick}>
+              切換至全部景點
+            </Button>
+            
+            <Form.Group>
+              <Form.Control className="mt-5" as="select" value={curCity} onChange={handleCityChange}>
+                {
+                  cities.map(city => {
+                    return(
+                      <option key={city.value} value={city.value}>{city.name}</option>
+                    )
+                  })
+                }
+                
+              </Form.Control>
+            </Form.Group>
           </>
       }
-    </React.Fragment>
+    </>
   )
 }
 

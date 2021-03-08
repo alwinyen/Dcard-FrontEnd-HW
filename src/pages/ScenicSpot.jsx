@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useEffect } from 'react';
 import GridDisplay from '../components/GridDisplay'
 
 import { useParams } from "react-router-dom";
@@ -26,4 +26,4 @@ function ScenicSpotCity() {
   )
 }
 
-export default ScenicSpotCity
+export default React.memo(ScenicSpotCity)

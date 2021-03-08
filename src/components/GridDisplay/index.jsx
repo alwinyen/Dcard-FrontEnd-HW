@@ -6,20 +6,19 @@ import ErrorBox from './ErrorBox'
 import HasMoreBox from './HasMoreBox'
 import { CurCityContext } from '../../contexts/Contexts'
 import InfiniteScroll from 'react-infinite-scroller';
-import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios';
 
 function GridDisplay() {
 
-  const [page, setPage] = useState(1)
+  const [pageGlobal, setPageGlobal] = useState(1);
   const [items, setItems] = useState([])
   const [hasMore, setHasMore] = useState(true)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [curCity] = useContext(CurCityContext)
 
-  const fetchMoreData = () => {
-    console.log("FETCH", curCity, page)
+  const fetchMoreData = (page) => {
+    page = pageGlobal === -1 ? 1 : page
     const skip = page <= 0 ? 0 : (page - 1) * 30
     const url = curCity !== "ALL" ? `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${curCity}` : `https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot`
 
@@ -42,16 +41,16 @@ function GridDisplay() {
           } else {
             if (res && res.data) {
               setItems(items.concat(res.data))
-              setPage(page + 1)
+              setPageGlobal(page);
             }
           }
       })
     }
   }
 
-  //When the city is changed, clear the item array
+  //When the city is changed, clear the item array and reset page number
   useEffect(() => {
-    setPage(1)
+    setPageGlobal(-1);
     setItems([])
     setHasMore(true)
     setError(false)
@@ -61,10 +60,10 @@ function GridDisplay() {
     <React.Fragment>
       <Container>
         <InfiniteScroll
-          pageStart={0}
+          pageStart={1}
           loadMore={fetchMoreData}
           hasMore={hasMore}
-          loader={<Spinner key={page} animation="grow" />}
+          loader={<div>Loading...</div>}
         >
           <CardColumns>
           {
@@ -72,6 +71,7 @@ function GridDisplay() {
             items.map(entry => {
               return (
                 <Card key={entry.ID} style={{ width: '18rem' }}>
+                  {/* Uncomment to enable image (disable for loading speed issue) */}
                   {/* <Card.Img variant="top" src={entry.Picture.PictureUrl1} /> */}
                   <Card.Body>
                     <Card.Title>{entry.Name}</Card.Title>
