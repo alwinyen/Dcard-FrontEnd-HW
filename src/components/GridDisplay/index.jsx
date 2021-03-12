@@ -63,7 +63,6 @@ function GridDisplay() {
           pageStart={1}
           loadMore={fetchMoreData}
           hasMore={hasMore}
-          loader={<div>Loading...</div>}
         >
           <CardColumns>
           {
