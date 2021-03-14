@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 import { defaultMode } from './constant'
 import { TypeContext, CurCityContext } from './contexts/Contexts'
 import Switcher from './components/Switcher'
@@ -16,6 +16,15 @@ function App() {
         <Router>
           <Switcher/>
           <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => {
+                  return (
+                    <Redirect to="/scenicSpot" /> 
+                  )
+              }}
+            />
             <Route path="/scenicSpot/:city" render={() => <ScenicSpot/>} />
             <Route exact path="/scenicSpot" render={() => <ScenicSpot/>} />
           </Switch>

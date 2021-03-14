@@ -10,6 +10,7 @@ import axios from 'axios';
 
 function GridDisplay() {
 
+  /* 定義狀態與Context */
   const [pageGlobal, setPageGlobal] = useState(1);
   const [items, setItems] = useState([])
   const [hasMore, setHasMore] = useState(true)
@@ -17,6 +18,7 @@ function GridDisplay() {
   const [error, setError] = useState(false)
   const [curCity] = useContext(CurCityContext)
 
+  /* 與API抓取資料，依照目前Context狀態決定請求端點位置， */
   const fetchMoreData = (page) => {
     page = pageGlobal === -1 ? 1 : page
     const skip = page <= 0 ? 0 : (page - 1) * 30
@@ -48,7 +50,7 @@ function GridDisplay() {
     }
   }
 
-  //When the city is changed, clear the item array and reset page number
+  /* 如更動目前城市狀態，重新設定狀態 */
   useEffect(() => {
     setPageGlobal(-1);
     setItems([])

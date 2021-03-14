@@ -12,6 +12,7 @@ function Switcher() {
   const [curCity, setcurCity] = useContext(CurCityContext)
   const history = useHistory();
 
+  /* 按鈕如被按下，更新目前狀態與目前城市Context，將使用者導向對應網址 */
   function handleButtonClick() {
     setType(!type)
 
@@ -27,6 +28,7 @@ function Switcher() {
     
   }
 
+  /* 目前城市如被更新，更新目前城市Context，將使用者導向對應網址 */
   function handleCityChange(e) {
     setcurCity(e.target.value)
     history.push(`/scenicSpot/${e.target.value}`);

@@ -11,6 +11,7 @@ function ScenicSpotCity() {
   const [city, setcurCity] = useContext(CurCityContext)
   const params = useParams();
 
+  /* 偵測網址是否含有城市名，如有偵測到設定目前城市Context */
   useEffect(() => {
     if (Object.values(params).length !== 0) {
       setType(cityMode)
