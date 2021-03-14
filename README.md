@@ -23,6 +23,7 @@
       <a href="#關於專案">關於專案</a>
       <ul>
         <li><a href="#使用框架">使用框架</a></li>
+        <li><a href="#專案架構">專案架構</a></li>
       </ul>
     </li>
     <li>
@@ -46,6 +47,43 @@
 
 * [ReactJS](https://reactjs.org/)
 * [React Bootstrap](https://react-bootstrap.netlify.app/)
+
+### 專案架構
+```sh
+ src
+ |
+ |--components (React Compnents)
+ |      |
+ |      |--GridDisplay (景點Grid主要顯示)
+ |      |      |
+ |      |      |--ErrorBox.jsx (API錯誤提示通知)
+ |      |      |
+ |      |      |--HasMoreBox.jsx (資料讀取完畢提示通知)
+ |      |      |
+ |      |      |--index.jsx (顯示邏輯處理)
+ |      |
+ |      |--Switcher (切換全部景點與城市景點)
+ |             |
+ |             |--index.jsx (切換邏輯與資料處理)
+ |      
+ |--contexts (Contexts 專案狀態)
+ |      |
+ |      |--Contexts.jsx (存取目前城市與狀態-全部顯示 或是 單一城市)
+ |
+ |--pages (React Router 導向頁面)
+ |      |
+ |      |--ScenicSpot.jsx (風景介紹頁面)
+ |
+ |--App.js (React Router 與 Context Provider 處理)
+ |
+ |--constant.js (Constant 定義)
+ |
+ |--index.js (主要載入點)
+ |
+ |--reportWebVitals.js
+ |
+ |--setupTests.js
+```
 
 <!-- GETTING STARTED -->
 ## 如何開始
