@@ -70,7 +70,7 @@ function GridDisplay() {
             items.map(entry => {
               return (
                 <Card key={entry.ID} style={{ width: '18rem' }}>
-                  {/* Uncomment to enable image (disable for loading speed issue) */}
+                  {/* Uncomment to enable image (disable due to loading speed ) */}
                   {/* <Card.Img variant="top" src={entry.Picture.PictureUrl1} /> */}
                   <Card.Body>
                     <Card.Title>{entry.Name}</Card.Title>
